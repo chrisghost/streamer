@@ -1,8 +1,24 @@
-@(message: String)
+@(files: List[String], formats: List[String], quality: List[String], mov:String, fm: String, q:String)
 
 @main("Welcome to Play 2.1") {
 
-<video width=480 height=32 controls>
-  <source src="/prev" type="video/avi">
+
+@for(f <- files) {
+    <strong>@f</strong><br />
+    @for(fmt <- formats) {
+        @for(q <- quality) {
+            <a href="/@f/@fmt/@q">@fmt/@q</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        }
+        <br />
+    }
+    <br />
+}
+
+
+<video id="video" autoplay preload controls>
+  <source src="http://krypton:9000/movie/@mov/@fm/@q" type="video/@fm"/>
 </video>
+
+
 }
