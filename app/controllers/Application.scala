@@ -22,7 +22,7 @@ object Converters {
         case "webm" => "-acodec libvorbis -ab 192k -f webm"
       }) +" -s "+quality +pipedFFout
 
-      println(convstr)
+    Logger.info(convstr)
     CLI.pipe(convstr)
   }
 
@@ -32,6 +32,7 @@ object Resources {
   import play.api.Play.current
 
   def getVideo(name : String) : Option[File] = {
+    Logger.info("Get video "+name)
     val f = Play.getFile("videos").list.toList.filter( _.contains(name) ).headOption
 
     f match {
